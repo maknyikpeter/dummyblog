@@ -1,0 +1,2 @@
+# dummyblog
+Spring blog application.
