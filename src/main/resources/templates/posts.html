@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	layout:decorator="layouts/layout">
+
+<head>
+<title>Dummy Blog</title>
+</head>
+
+<body>
+	<!-- Main Content -->
+	<div layout:fragment="content">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-md-10 mx-auto">
+					<div th:each="post : ${posts}">
+						<div class="post-preview">
+							<a th:href="@{/post/{title}(title=${post.title})}">
+								<h1 th:text="${post.title}" class="post-title"></h1>
+							</a>
+							<h2 th:text="${post.subTitle}" class="post-subtitle"></h2>
+							<p class="post-meta">
+								Posztolta <a>felhasználó_1</a> , ekkor:
+								<a>2021.04.01</a>
+							</p>
+						</div>
+						<hr>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<hr>
+</body>
+
+</html>
