@@ -13,7 +13,7 @@ import com.dummyblog.app.repository.PostRepository;
 import com.dummyblog.app.service.PostService;
 
 @Service
-public class PostServiceImpl implements PostService{
+public class PostServiceImpl implements PostService {
 
 	private PostRepository postRepository;
 	private ModelMapper modelMapper;

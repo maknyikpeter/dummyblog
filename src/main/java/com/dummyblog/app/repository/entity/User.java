@@ -35,24 +35,9 @@ public class User {
 	public User() {
 		
 	}
-
-	public User(String name, String email, String password, Privileges role) {
-		this.name = name;
-		this.email = email;
-		this.password = password;
-		this.role = role;
-	}
 	
-	public User(Long id, Integer age, String email, String name,String password, Privileges role) {
+	public User(Long id, Integer age, String email, String name, String password, Privileges role) {
 		this.id = id;
-		this.age = age;
-		this.email = email;
-		this.name = name;
-		this.password = password;
-		this.role = role;
-	}
-	
-	public User(Integer age, String email, String name,String password, Privileges role) {
 		this.age = age;
 		this.email = email;
 		this.name = name;

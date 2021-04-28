@@ -19,7 +19,6 @@ public class PostDto {
 	
 	private UserDto user;
 
-	   
     public PostDto() {
 
     }
@@ -126,7 +125,6 @@ public class PostDto {
     public String toString() {
         return "PostDto [title=" + title + ", subTitle=" + subTitle + ", content=" + content + ", posted=" + posted
                 + ", user=" + user + "]";
-    }
-	
+    }	
 
 }

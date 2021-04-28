@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 
 public class UserDto {
 	
-private Long id;
+	private Long id;
     
 	@NotEmpty(message = "Name is required!")
 	private String name;
@@ -23,10 +23,7 @@ private Long id;
 		
 	}
 
-    public UserDto(Long id, @NotEmpty(message = "Name is required!") String name,
-            @NotEmpty(message = "Password is required!") String password,
-            @NotNull(message = "Age is required!") Integer age,
-            @NotEmpty(message = "Email is required!") String email) {
+    public UserDto(Long id, String name, String password, Integer age, String email) {
         super();
         this.id = id;
         this.name = name;
