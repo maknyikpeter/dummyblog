@@ -13,15 +13,15 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 col-md-10 mx-auto">
-					<div th:each="post, iterator : ${posts}">
+					<div th:each="post : ${posts}">
 						<div class="post-preview">
-							<a th:href="@{/post/{id}(id=${iterator.index})}">
+							<a th:href="@{/post/{title}(title=${post.title})}">
 								<h1 th:text="${post.title}" class="post-title"></h1>
 							</a>
 							<h2 th:text="${post.subTitle}" class="post-subtitle"></h2>
 							<p class="post-meta">
-								Posztolta <a>felhasználó_1</a> , ekkor:
-								<a>2021.04.01</a>
+								Posztolta <a th:text="${post.user.name}">író neve</a> , ekkor:
+								<a th:text="${#dates.format(post.posted, 'yyyy.MM.dd HH:mm')}">dátum</a>
 							</p>
 						</div>
 						<hr>
