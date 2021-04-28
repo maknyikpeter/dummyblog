@@ -13,12 +13,11 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 col-md-10 mx-auto">
-					<div th:each="post, iterator : ${posts}">
+					<div> 
 						<div class="post-preview">
-							<a th:href="@{/post/{id}(id=${iterator.index})}">
-								<h1 th:text="${post.title}" class="post-title"></h1>
-							</a>
+							<h1 th:text="${post.title}" class="post-title"></h1>
 							<h2 th:text="${post.subTitle}" class="post-subtitle"></h2>
+							<section th:utext="${post.content}">Ez lesz itt a poszt tartalmi része.</section>
 							<p class="post-meta">
 								Posztolta <a>felhasználó_1</a> , ekkor:
 								<a>2021.04.01</a>
@@ -30,7 +29,6 @@
 			</div>
 		</div>
 	</div>
-	<hr>
 </body>
 
 </html>
