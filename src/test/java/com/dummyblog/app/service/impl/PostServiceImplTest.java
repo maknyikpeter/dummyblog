@@ -53,18 +53,19 @@ public class PostServiceImplTest {
 	@Test
 	public void testGetPostShouldReturnAPostDtoWhenThePostExists() {
 		// Given
-		PostDto postDto1 = Mockito.mock(PostDto.class);
 		PostDto expected = Mockito.mock(PostDto.class);
-		Post post1 = Mockito.mock(Post.class);
-		Mockito.when(postRepository.findByTitle(THE_TITLE)).thenReturn(post1);
-		Mockito.when(modelMapper.map(post1, PostDto.class)).thenReturn(postDto1);
+		Post post = Mockito.mock(Post.class);
+		Mockito.when(postRepository.findByTitle(THE_TITLE)).thenReturn(post);
+		Mockito.when(modelMapper.map(post, PostDto.class)).thenReturn(expected);
 		
 		// When
 		PostDto actual = underTest.getPost(THE_TITLE);
 		
 		// Then
-//		Assertions.assertEquals(expected, actual);
-		Mockito.verify(postRepository);
+		Assertions.assertEquals(expected, actual);
+		Mockito.verify(postRepository).findByTitle(THE_TITLE);
+	    Mockito.verify(modelMapper).map(post, PostDto.class);
+		Mockito.verifyNoMoreInteractions(postRepository, modelMapper, post, expected);
 	}
 	
 	@Test
