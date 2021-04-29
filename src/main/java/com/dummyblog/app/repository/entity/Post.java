@@ -17,32 +17,32 @@ import org.hibernate.annotations.CreationTimestamp;
 @Entity
 @Table(name = "posts")
 public class Post {
-	
+
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	private Long id;
-	
+
 	@Column(nullable = false)
 	private String title;
-	
+
 	@Column(nullable = false)
 	private String subTitle;
-	
+
 	@Column(columnDefinition = "TEXT", nullable = false)
 	private String content;
 
 	@Column(nullable = false)
 	@CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date posted;
-	
+
 	@ManyToOne
 	private User user;
-	
+
 	public Post() {
-		
+
 	}
-	
+
 	public Post(String title, String subTitle, String content, User user) {
 		this.title = title;
 		this.subTitle = subTitle;
@@ -50,7 +50,7 @@ public class Post {
 		this.user = user;
 	}
 
-	public Post(Long id, String content, Date posted, String subTitle, String title,  User user) {
+	public Post(Long id, String content, Date posted, String subTitle, String title, User user) {
 		this.id = id;
 		this.content = content;
 		this.posted = posted;
@@ -58,7 +58,7 @@ public class Post {
 		this.title = title;
 		this.user = user;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -109,7 +109,7 @@ public class Post {
 
 	@Override
 	public String toString() {
-		return "Post [title=" + title  + "]";
+		return "Post [title=" + title + "]";
 	}
 
 	@Override
@@ -166,5 +166,5 @@ public class Post {
 			return false;
 		return true;
 	}
-	
+
 }

@@ -22,11 +22,11 @@ public class PostServiceImplTest {
 
 	@BeforeEach
 	public void init() {
-	    postRepository = Mockito.mock(PostRepository.class);
-	    modelMapper = Mockito.mock(ModelMapper.class);
+		postRepository = Mockito.mock(PostRepository.class);
+		modelMapper = Mockito.mock(ModelMapper.class);
 		underTest = new PostServiceImpl(postRepository, modelMapper);
 	}
-	
+
 	@Test
 	public void testGetPostsShouldCallPostRepository() {
 		// Given
@@ -38,10 +38,10 @@ public class PostServiceImplTest {
 		Mockito.when(postRepository.findAll()).thenReturn(List.of(post1, post2));
 		Mockito.when(modelMapper.map(post1, PostDto.class)).thenReturn(postDto1);
 		Mockito.when(modelMapper.map(post2, PostDto.class)).thenReturn(postDto2);
-		
+
 		// When
 		List<PostDto> actual = underTest.getPosts();
-		
+
 		// Then
 		Assertions.assertEquals(expected, actual);
 		Mockito.verify(postRepository).findAll();
@@ -57,39 +57,39 @@ public class PostServiceImplTest {
 		Post post = Mockito.mock(Post.class);
 		Mockito.when(postRepository.findByTitle(THE_TITLE)).thenReturn(post);
 		Mockito.when(modelMapper.map(post, PostDto.class)).thenReturn(expected);
-		
+
 		// When
 		PostDto actual = underTest.getPost(THE_TITLE);
-		
+
 		// Then
 		Assertions.assertEquals(expected, actual);
 		Mockito.verify(postRepository).findByTitle(THE_TITLE);
-	    Mockito.verify(modelMapper).map(post, PostDto.class);
+		Mockito.verify(modelMapper).map(post, PostDto.class);
 		Mockito.verifyNoMoreInteractions(postRepository, modelMapper, post, expected);
 	}
-	
+
 	@Test
 	public void testGetPostShouldThrowNullPointerExceptionWhenTheTitleParameterIsNull() {
 		// Given
-		
+
 		// When
 		Assertions.assertThrows(NullPointerException.class, () -> underTest.getPost(null));
-		
+
 		// Then
 		Mockito.verifyNoMoreInteractions(postRepository, modelMapper);
 	}
 
 	@Test
-    public void testGetPostShouldThrowNullPointerExceptionWhenThePostDoesNotExists() {
-        // Given
-        Mockito.when(postRepository.findByTitle(THE_TITLE)).thenThrow(NullPointerException.class);
-        
-        // When
-        Assertions.assertThrows(NullPointerException.class, () -> underTest.getPost(THE_TITLE));
-        
-        // Then
-        Mockito.verify(postRepository).findByTitle(THE_TITLE);
-        Mockito.verifyNoMoreInteractions(postRepository, modelMapper);
-    }
+	public void testGetPostShouldThrowNullPointerExceptionWhenThePostDoesNotExists() {
+		// Given
+		Mockito.when(postRepository.findByTitle(THE_TITLE)).thenThrow(NullPointerException.class);
+
+		// When
+		Assertions.assertThrows(NullPointerException.class, () -> underTest.getPost(THE_TITLE));
+
+		// Then
+		Mockito.verify(postRepository).findByTitle(THE_TITLE);
+		Mockito.verifyNoMoreInteractions(postRepository, modelMapper);
+	}
 
 }

@@ -16,26 +16,26 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	private Long id;
-	
+
 	@Column(nullable = false)
 	private String name;
-	
+
 	@Column(nullable = false)
 	private String password;
-	
+
 	@Column(nullable = false)
 	private Integer age;
-	
+
 	@Column(unique = true, nullable = false)
 	private String email;
-	
+
 	@Enumerated(EnumType.STRING)
 	private Privileges role;
-	
+
 	public User() {
-		
+
 	}
-	
+
 	public User(Long id, Integer age, String email, String name, String password, Privileges role) {
 		this.id = id;
 		this.age = age;
@@ -44,7 +44,7 @@ public class User {
 		this.password = password;
 		this.role = role;
 	}
-	
+
 	public Privileges getRole() {
 		return role;
 	}
@@ -68,7 +68,7 @@ public class User {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public String getPassword() {
 		return password;
 	}
@@ -92,14 +92,14 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", age=" + age + ", email=" + email + "]";
 	}
 
 	public enum Privileges {
-		USER,ADMIN;
+		USER, ADMIN;
 	}
 
 	@Override
@@ -141,5 +141,5 @@ public class User {
 			return false;
 		return true;
 	}
-	
+
 }

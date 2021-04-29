@@ -17,7 +17,7 @@ public class PostServiceImpl implements PostService {
 
 	private PostRepository postRepository;
 	private ModelMapper modelMapper;
-	
+
 	@Autowired
 	public PostServiceImpl(PostRepository postRepository, ModelMapper modelMapper) {
 		this.postRepository = postRepository;
@@ -26,13 +26,14 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public List<PostDto> getPosts() {
-		return postRepository.findAll().stream().map(post -> modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
+		return postRepository.findAll().stream().map(post -> modelMapper.map(post, PostDto.class))
+				.collect(Collectors.toList());
 	}
-	
+
 	@Override
 	public PostDto getPost(String title) {
 		Objects.requireNonNull(title, "Title is a required parameter for getting post.");
-        return modelMapper.map(postRepository.findByTitle(title), PostDto.class);
+		return modelMapper.map(postRepository.findByTitle(title), PostDto.class);
 	}
 
 }

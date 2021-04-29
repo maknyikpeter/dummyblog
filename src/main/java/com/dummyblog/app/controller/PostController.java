@@ -10,9 +10,9 @@ import com.dummyblog.app.service.PostService;
 
 @Controller
 public class PostController {
-	
-	private PostService postService;	
-	
+
+	private PostService postService;
+
 	@Autowired
 	public PostController(PostService postService) {
 		this.postService = postService;
@@ -20,10 +20,10 @@ public class PostController {
 
 	@GetMapping("/")
 	public String getAllPosts(Model model) {
-		model.addAttribute("posts",postService.getPosts());
+		model.addAttribute("posts", postService.getPosts());
 		return "posts";
 	}
-	
+
 	@GetMapping("/post/{title}")
 	public String getPost(@PathVariable(value = "title") String title, Model model) throws Exception {
 		if (title == null)

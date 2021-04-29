@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="https://www.thymeleaf.org"
-	layout:decorator="layouts/layout">
+	xmlns:th="https://www.thymeleaf.org" layout:decorator="layouts/layout">
 
 <head>
 <title>Dummy Blog</title>
@@ -13,14 +12,15 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 col-md-10 mx-auto">
-					<div> 
+					<div>
 						<div class="post-preview">
 							<h1 th:text="${post.title}" class="post-title"></h1>
 							<h2 th:text="${post.subTitle}" class="post-subtitle"></h2>
-							<section th:utext="${post.content}">Ez lesz itt a poszt tartalmi része.</section>
+							<section th:utext="${post.content}">Ez lesz itt a poszt
+								tartalmi része.</section>
 							<p class="post-meta">
-								Posztolta <a th:text="${post.user.name}">író neve</a> , ekkor:
-								<a th:text="${#dates.format(post.posted, 'yyyy.MM.dd HH:mm')}">dátum</a>
+								Posztolta <a th:text="${post.user.name}">író neve</a> , ekkor: <a
+									th:text="${#dates.format(post.posted, 'yyyy.MM.dd HH:mm')}">dátum</a>
 							</p>
 						</div>
 						<hr>
