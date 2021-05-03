@@ -17,6 +17,9 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
+					<li th:if="${#authorization.expression('isAuthenticated()')}" class="nav-item">
+						<a class="nav-link" th:href="@{/posteditor}">Új	bejegyzés</a>
+					</li>
 					<li class="nav-item">
 						<a class="nav-link" th:href="@{/}">Kezdőlap</a>
 					</li>

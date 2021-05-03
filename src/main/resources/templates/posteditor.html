@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	layout:decorator="layouts/layout">
+
+<head>
+<title>Dummy Blog</title>
+</head>
+
+<body>
+	<!-- Main Content -->
+	<div layout:fragment="content">
+
+		<div class="container">
+			<form name="posteditor" th:action="@{/posteditor}" th:object="${postDto}" method="post" class="form-signin">
+				<h2 class="form-signin-heading">Bejegyzés létrehozása</h2>			
+				<label for="title" class="sr-only">Cím</label> 
+				<input type="text" id="title" name="title" th:field="*{title}" class="form-control" placeholder="Cím" required="true" />
+				<label for="subTitle" class="sr-only">Alcím</label> 
+				<input type="text" id="subTitle" name="subTitle" th:field="*{subTitle}" class="form-control" placeholder="Alcím" required="true" />
+				<label for="content" class="sr-only">Tartalom</label>
+				<textarea rows="10" cols="50" th:field="*{content}" placeholder="Tartalom" required="true"></textarea>
+				<button class="btn btn-lg btn-primary btn-block" type="submit">Küldés</button>
+			</form>
+		</div>
+	</div>
+	<hr>
+
+</body>
+
+</html>
