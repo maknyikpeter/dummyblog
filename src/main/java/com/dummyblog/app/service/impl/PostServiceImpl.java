@@ -50,4 +50,11 @@ public class PostServiceImpl implements PostService {
 		return modelMapper.map(postRepository.save(post), PostDto.class);
 	}
 
+	@Override
+	public List<PostDto> getAllPost(Long id) {
+		Objects.requireNonNull(id, "Id is a required parameter for getting all post.");
+		return postRepository.findByUserId(id).stream().map(post -> modelMapper.map(post, PostDto.class))
+				.collect(Collectors.toList());
+	}
+
 }
