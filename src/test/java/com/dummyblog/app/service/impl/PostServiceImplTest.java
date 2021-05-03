@@ -24,7 +24,7 @@ public class PostServiceImplTest {
 	public void init() {
 		postRepository = Mockito.mock(PostRepository.class);
 		modelMapper = Mockito.mock(ModelMapper.class);
-		underTest = new PostServiceImpl(postRepository, modelMapper);
+		underTest = new PostServiceImpl(postRepository, modelMapper, null);
 	}
 
 	@Test
