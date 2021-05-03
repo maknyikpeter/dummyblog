@@ -20,7 +20,7 @@
 							<section th:utext="${post.content}">Ez lesz itt a poszt
 								tartalmi része.</section>
 							<p class="post-meta">
-								Posztolta <a th:text="${post.user.name}">író neve</a> , ekkor: <a
+								Posztolta <a th:href="@{'/user/' + ${post.user.id}}" th:text="${post.user.name}">író neve</a> , ekkor: <a
 									th:text="${#dates.format(post.posted, 'yyyy.MM.dd HH:mm')}">dátum</a>
 							</p>
 						</div>

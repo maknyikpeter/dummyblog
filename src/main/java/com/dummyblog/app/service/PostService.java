@@ -12,4 +12,6 @@ public interface PostService {
 
 	public PostDto createPost(PostDto postDto, String email);
 
+	public List<PostDto> getAllPost(Long id);
+
 }

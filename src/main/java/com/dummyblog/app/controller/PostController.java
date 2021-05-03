@@ -52,5 +52,13 @@ public class PostController {
 		postService.createPost(postDto, principalName);
 		return "redirect:/";
 	}
+	
+	@GetMapping("/user/{id}")
+	public String getAllPostOfUser(@PathVariable(value = "id") Long id, Model model) throws Exception {
+		if (id == null)
+			throw new Exception("There is no stories!");
+		model.addAttribute("posts", postService.getAllPost(id));
+		return "postsOfUser";
+	}
 
 }
