@@ -10,4 +10,6 @@ public interface PostService {
 
 	public PostDto getPost(String title);
 
+	public PostDto createPost(PostDto postDto, String email);
+
 }

@@ -1,11 +1,18 @@
 package com.dummyblog.app.controller;
 
+import java.security.Principal;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import com.dummyblog.app.domain.dto.PostDto;
 import com.dummyblog.app.service.PostService;
 
 @Controller
@@ -31,4 +38,19 @@ public class PostController {
 		model.addAttribute("post", postService.getPost(title));
 		return "post";
 	}
+
+	@GetMapping("/posteditor")
+	public String getPostEditor(Model model) {
+		model.addAttribute("postDto", new PostDto());
+		return "posteditor";
+
+	}
+
+	@PostMapping("/posteditor")
+	public String createNewPost(@Valid @ModelAttribute PostDto postDto, Principal principal) {
+		String principalName = principal.getName();
+		postService.createPost(postDto, principalName);
+		return "redirect:/";
+	}
+
 }

@@ -10,6 +10,7 @@ import org.modelmapper.ModelMapper;
 
 import com.dummyblog.app.domain.dto.PostDto;
 import com.dummyblog.app.repository.PostRepository;
+import com.dummyblog.app.repository.UserRepository;
 import com.dummyblog.app.repository.entity.Post;
 
 public class PostServiceImplTest {
@@ -18,13 +19,15 @@ public class PostServiceImplTest {
 
 	private PostServiceImpl underTest;
 	private PostRepository postRepository;
+	private UserRepository userRepository;
 	private ModelMapper modelMapper;
 
 	@BeforeEach
 	public void init() {
 		postRepository = Mockito.mock(PostRepository.class);
+		userRepository = Mockito.mock(UserRepository.class);
 		modelMapper = Mockito.mock(ModelMapper.class);
-		underTest = new PostServiceImpl(postRepository, modelMapper);
+		underTest = new PostServiceImpl(postRepository, userRepository, modelMapper);
 	}
 
 	@Test
@@ -90,6 +93,39 @@ public class PostServiceImplTest {
 		// Then
 		Mockito.verify(postRepository).findByTitle(THE_TITLE);
 		Mockito.verifyNoMoreInteractions(postRepository, modelMapper);
+	}
+	
+	@Test
+	public void testCreatePostShouldThrowNullPointerExceptionWhenThePostDtoParameterIsNull() {
+		// Given
+		
+		// When
+		Assertions.assertThrows(NullPointerException.class, () -> underTest.createPost(null,"email"));
+		
+		// Then
+		Mockito.verifyNoMoreInteractions(postRepository, modelMapper);
+	}
+	
+	@Test
+	public void testCreatePostShouldThrowNullPointerExceptionWhenBothParameterIsNull() {
+		// Given
+		
+		// When
+		Assertions.assertThrows(NullPointerException.class, () -> underTest.createPost(null,null));
+		
+		// Then
+		Mockito.verifyNoMoreInteractions(postRepository, modelMapper);
+	}
+	
+	@Test
+	public void testCreatePostShouldThrowNullPointerExceptionWhenTheEmailParameterIsNull() {
+		// Given
+		
+		// When
+		Assertions.assertThrows(NullPointerException.class, () -> underTest.createPost(Mockito.mock(PostDto.class),null));
+		
+		// Then
+		Mockito.verifyNoMoreInteractions(postRepository);
 	}
 
 }
