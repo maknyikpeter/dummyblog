@@ -12,4 +12,6 @@ public interface PostRepository extends CrudRepository<Post, Long> {
 
 	Post findByTitle(String title);
 
+	List<Post> findByUserId(Long i);
+
 }

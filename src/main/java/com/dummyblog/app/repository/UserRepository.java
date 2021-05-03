@@ -6,4 +6,6 @@ import com.dummyblog.app.repository.entity.User;
 
 public interface UserRepository extends CrudRepository<User, Long> {
 
+	User findByEmail(String email);
+
 }
