@@ -94,38 +94,85 @@ public class PostServiceImplTest {
 		Mockito.verify(postRepository).findByTitle(THE_TITLE);
 		Mockito.verifyNoMoreInteractions(postRepository, modelMapper);
 	}
-	
+
 	@Test
 	public void testCreatePostShouldThrowNullPointerExceptionWhenThePostDtoParameterIsNull() {
 		// Given
-		
+
 		// When
-		Assertions.assertThrows(NullPointerException.class, () -> underTest.createPost(null,"email"));
-		
+		Assertions.assertThrows(NullPointerException.class, () -> underTest.createPost(null, "email"));
+
 		// Then
 		Mockito.verifyNoMoreInteractions(postRepository, modelMapper);
 	}
-	
+
 	@Test
 	public void testCreatePostShouldThrowNullPointerExceptionWhenBothParameterIsNull() {
 		// Given
-		
+
 		// When
-		Assertions.assertThrows(NullPointerException.class, () -> underTest.createPost(null,null));
-		
+		Assertions.assertThrows(NullPointerException.class, () -> underTest.createPost(null, null));
+
 		// Then
 		Mockito.verifyNoMoreInteractions(postRepository, modelMapper);
 	}
-	
+
 	@Test
 	public void testCreatePostShouldThrowNullPointerExceptionWhenTheEmailParameterIsNull() {
 		// Given
-		
+
 		// When
-		Assertions.assertThrows(NullPointerException.class, () -> underTest.createPost(Mockito.mock(PostDto.class),null));
-		
+		Assertions.assertThrows(NullPointerException.class,	() -> underTest.createPost(Mockito.mock(PostDto.class), null));
+
 		// Then
 		Mockito.verifyNoMoreInteractions(postRepository);
+	}
+
+	@Test
+	public void testGetAllPostShouldThrowNullPointerExceptionWhenTheUserDoesNotExist() {
+		// Given
+		Mockito.when(postRepository.findByUserId((long) 1)).thenThrow(NullPointerException.class);
+
+		// When
+		Assertions.assertThrows(NullPointerException.class, () -> underTest.getAllPost((long) 1));
+
+		// Then
+		Mockito.verify(postRepository).findByUserId((long) 1);
+		Mockito.verifyNoMoreInteractions(postRepository, userRepository, modelMapper);
+	}
+
+	@Test
+	public void testGetAllPostShouldThrowNullPointerExceptionWhenTheIdParameterIsNull() {
+		// Given
+
+		// When
+		Assertions.assertThrows(NullPointerException.class, () -> underTest.getAllPost(null));
+
+		// Then
+		Mockito.verifyNoMoreInteractions(postRepository);
+	}
+
+	@Test
+	public void testGetAllPostShouldReturnAPostListWhenTheIdExists() {
+		// Given
+		PostDto postDto1 = Mockito.mock(PostDto.class);
+		PostDto postDto2 = Mockito.mock(PostDto.class);
+		List<PostDto> expected = List.of(postDto1, postDto2);
+		Post post1 = Mockito.mock(Post.class);
+		Post post2 = Mockito.mock(Post.class);
+		Mockito.when(postRepository.findByUserId((long) 1)).thenReturn(List.of(post1, post2));
+		Mockito.when(modelMapper.map(post1, PostDto.class)).thenReturn(postDto1);
+		Mockito.when(modelMapper.map(post2, PostDto.class)).thenReturn(postDto2);
+
+		// When
+		List<PostDto> actual = underTest.getAllPost((long) 1);
+
+		// Then
+		Assertions.assertEquals(expected, actual);
+		Mockito.verify(postRepository).findByUserId((long) 1);
+		Mockito.verify(modelMapper).map(post1, PostDto.class);
+		Mockito.verify(modelMapper).map(post2, PostDto.class);
+		Mockito.verifyNoMoreInteractions(postRepository, modelMapper, postDto1, postDto2, post1, post2);
 	}
 
 }
