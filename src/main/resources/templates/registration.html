@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	layout:decorator="layouts/layout">
+
+<head>
+<title>Dummy Blog</title>
+</head>
+
+<body>
+	<!-- Main Content -->
+	<div layout:fragment="content">
+		<div class="container">
+			<form name="registration" th:action="@{/registration}" th:object="${userDto}" method="post">
+				<h2 class="form-signin-heading">Kérlek regisztrálj</h2>
+				<label for="name">Teljes név</label>
+				<input type="text" id="name" name="name" th:field="*{name}"	class="form-control" placeholder="Teljes név" required="true"/>
+				<label for="email">E-mail cím</label>
+				<input type="text" id="email" name="email" th:field="*{email}" class="form-control" placeholder="E-mail" required="true"/>
+				<label for="age">Életkor</label>
+				<input type="number" id="age" name="age" th:field="*{age}" class="form-control" required="true"/>
+				<label for="password">Jelszó</label>
+				<input type="password" id="password" name="password" th:field="*{password}" class="form-control" placeholder="Jelszó" required="true"/>
+				<button class="btn btn-lg btn-primary btn-block" type="submit">Regisztráció</button>
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>
