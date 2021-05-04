@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.dummyblog.app.domain.dto.UserDto;
 import com.dummyblog.app.repository.UserRepository;
+import com.dummyblog.app.repository.entity.User;
 import com.dummyblog.app.service.UserService;
 
 @Service
@@ -25,7 +26,9 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDto getUser(String email) {
 		Objects.requireNonNull(email, "Email is a required parameter.");
-		return modelMapper.map(userRepository.findByEmail(email), UserDto.class);
+		User user = userRepository.findByEmail(email);
+		Objects.requireNonNull(user, "The user does not exist");
+		return modelMapper.map(user, UserDto.class);
 	}
 
 }

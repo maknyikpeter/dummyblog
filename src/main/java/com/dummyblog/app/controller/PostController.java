@@ -1,6 +1,7 @@
 package com.dummyblog.app.controller;
 
 import java.security.Principal;
+import java.util.Objects;
 
 import javax.validation.Valid;
 
@@ -54,9 +55,8 @@ public class PostController {
 	}
 	
 	@GetMapping("/user/{id}")
-	public String getAllPostOfUser(@PathVariable(value = "id") Long id, Model model) throws Exception {
-		if (id == null)
-			throw new Exception("There is no stories!");
+	public String getAllPostOfUser(@PathVariable(value = "id") Long id, Model model) {
+		Objects.requireNonNull(id, "There is no posts!");
 		model.addAttribute("posts", postService.getAllPost(id));
 		return "postsOfUser";
 	}
