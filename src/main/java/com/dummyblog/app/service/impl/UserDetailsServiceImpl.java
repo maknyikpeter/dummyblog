@@ -1,5 +1,7 @@
 package com.dummyblog.app.service.impl;
 
+import java.util.Objects;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,6 +23,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		Objects.requireNonNull(username, "Username cannot be null");
 		User user = userRepository.findByEmail(username);
 		if (user == null) {
 			throw new UsernameNotFoundException(username);

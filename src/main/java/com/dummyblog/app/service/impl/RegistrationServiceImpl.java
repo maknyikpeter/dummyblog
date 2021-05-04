@@ -1,5 +1,7 @@
 package com.dummyblog.app.service.impl;
 
+import java.util.Objects;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,7 +23,8 @@ public class RegistrationServiceImpl implements RegistrationService {
 	private ModelMapper modelMapper;
 
 	@Autowired
-	public RegistrationServiceImpl(PasswordEncoder passwordEncoder, UserRepository userRepository, ModelMapper modelMapper) {
+	public RegistrationServiceImpl(PasswordEncoder passwordEncoder, UserRepository userRepository,
+			ModelMapper modelMapper) {
 		this.passwordEncoder = passwordEncoder;
 		this.userRepository = userRepository;
 		this.modelMapper = modelMapper;
@@ -29,6 +32,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 
 	@Override
 	public void registerUser(UserDto userDto) {
+		Objects.requireNonNull(userDto, "UserDto is a mandatory parameter");
 		User user = modelMapper.map(userDto, User.class);
 		user.setRole(USER_ROLE);
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
